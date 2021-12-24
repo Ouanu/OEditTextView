@@ -130,7 +130,6 @@ public class OEditText extends androidx.appcompat.widget.AppCompatEditText {
             file.delete();
     }
 
-
     /**
      * Only when you click the view, the soft keyboard will show.
      *
