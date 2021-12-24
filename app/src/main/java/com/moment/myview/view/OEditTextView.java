@@ -13,6 +13,7 @@ import android.widget.ScrollView;
 
 import androidx.annotation.Nullable;
 
+import java.io.File;
 
 
 public class OEditTextView extends ScrollView {
@@ -47,6 +48,8 @@ public class OEditTextView extends ScrollView {
         linearLayout.addView(editText);
         this.addView(linearLayout);
     }
+
+
 
 
 }

@@ -1,12 +1,21 @@
 package com.moment.myview;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.widget.RelativeLayout;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContract;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.moment.myview.view.OEditTextView;
 import com.moment.myview.view.OToolBar;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,6 +40,5 @@ public class MainActivity extends AppCompatActivity {
 //        util.setFloatView(oetText, toolbar, 0);
 //        util.setFloatView(rlMain, oetText, 0);
     }
-
 
 }
