@@ -13,12 +13,15 @@ import android.widget.ScrollView;
 
 import androidx.annotation.Nullable;
 
+import com.moment.myview.view.tools.KeyboardChangeListener;
+
 import java.io.File;
 
 
 public class OEditTextView extends ScrollView {
 
     private Context context;
+    private KeyboardChangeListener changeListener;
 
 
 
@@ -47,6 +50,7 @@ public class OEditTextView extends ScrollView {
         linearLayout.setOrientation(LinearLayout.VERTICAL);
         linearLayout.addView(editText);
         this.addView(linearLayout);
+
     }
 
 

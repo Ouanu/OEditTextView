@@ -1,4 +1,4 @@
-package com.moment.myview.utils;
+package com.moment.myview.view.tools;
 
 import android.app.Activity;
 import android.graphics.Point;
@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.ViewTreeObserver;
+
+import com.moment.myview.view.OEditText;
 
 /*
 让控件悬浮在键盘上方
@@ -36,15 +38,17 @@ public class FloatViewUtil {
             Rect rect = new Rect();
             context.getWindow().getDecorView().getWindowVisibleDisplayFrame(rect);
             int nowHeight = height - (rect.bottom - rect.top);
-            Log.d("KEYBOARD_________", "setFloatView: " + nowHeight);
             boolean isShowing = nowHeight > height / 3;
-            Log.d("KEYBOARD_________", "setFloatView: " + height);
+
             if (isShowing) {
-                floatView.animate().translationY(-nowHeight + diff).setDuration(0).start();
+                floatView.animate().translationY(-nowHeight).setDuration(0).start();
             } else {
                 floatView.animate().translationY(0).start();
             }
         };
         root.getViewTreeObserver().addOnGlobalLayoutListener(layoutListener);
+
+
+
     }
 }
