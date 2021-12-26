@@ -40,7 +40,6 @@ public class OEditTextView extends ScrollView {
         init();
     }
 
-
     private void init() {
         OEditText editText = new OEditText(context);
         editText.setMinHeight(800);

@@ -17,6 +17,7 @@ import android.text.Spanned;
 import android.text.style.ImageSpan;
 import android.util.AttributeSet;
 
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.inputmethod.InputMethodManager;
 
@@ -54,6 +55,7 @@ public class OEditText extends androidx.appcompat.widget.AppCompatEditText {
     }
 
     private void initView() {
+        this.setGravity(Gravity.START);
         im = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
         desc.append(this.getText());
         loadText(desc);
