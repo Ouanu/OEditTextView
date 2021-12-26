@@ -12,7 +12,6 @@ public class MainActivity extends AppCompatActivity {
 
     private OEditTextView oetText;
     private RelativeLayout rlMain;
-    private OToolBar toolbar;
     private ViewTreeObserver observer;
 
 
@@ -26,9 +25,6 @@ public class MainActivity extends AppCompatActivity {
     private void initView() {
         rlMain = findViewById(R.id.rl_main);
         oetText = findViewById(R.id.oet_text);
-        toolbar = findViewById(R.id.toolbar);
-        observer = rlMain.getViewTreeObserver();
-
     }
 
 }

@@ -2,18 +2,22 @@ package com.moment.myview.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.HorizontalScrollView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
-
+import android.widget.TextView;
 
 import com.moment.myview.R;
 
 public class OToolBar extends LinearLayout {
 
     private Context context;
+    private TextView bold;
+    private TextView size;
+    private TextView italic;
+    private TextView addTitle;
+    private ImageView addList;
+    private ImageView btnGetUri;
 
     public OToolBar(Context context) {
         super(context);

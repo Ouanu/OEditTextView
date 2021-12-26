@@ -3,11 +3,12 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="50dp"
+    android:weightSum="6"
     android:gravity="center">
 
     <TextView
         android:id="@+id/bold"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:gravity="center"
@@ -18,7 +19,7 @@
 
     <TextView
         android:id="@+id/size"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:gravity="center"
@@ -29,7 +30,7 @@
 
     <TextView
         android:id="@+id/italic"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:gravity="center"
@@ -40,7 +41,7 @@
 
     <TextView
         android:id="@+id/add_title"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:gravity="center"
@@ -49,20 +50,17 @@
         android:fontFamily="sans-serif-black"
         android:textSize="22sp"/>
 
-    <TextView
+    <ImageView
         android:id="@+id/add_list"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:gravity="center"
-        android:text="·—"
-        android:textColor="@color/black"
-        android:fontFamily="sans-serif-black"
-        android:textSize="22sp"/>
+        android:src="@drawable/ic_baseline_format_list_bulleted_24"
+        android:scaleType="center"/>
 
     <ImageView
         android:id="@+id/btn_get_uri"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:src="@drawable/ic_baseline_image_24"

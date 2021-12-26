@@ -7,15 +7,15 @@ import android.content.res.Resources;
 import android.util.DisplayMetrics;
 
 /**
- * get Screen width or height
+ * get Screen's width or height
  */
-public class GetScreenWidthOrHeight {
+public class GetScreenWidthOrHeightUtil {
 
     private Context context;
     private Resources resources;
     private DisplayMetrics metrics;
 
-    public GetScreenWidthOrHeight(Context context) {
+    public GetScreenWidthOrHeightUtil(Context context) {
         this.context = context;
         resources = context.getResources();
         metrics = resources.getDisplayMetrics();
