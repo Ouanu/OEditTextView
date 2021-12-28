@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private OEditTextView oetText;
     private static boolean isBold = false;
-
+    private StringBuilder builder = new StringBuilder();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +78,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (v.getId() == R.id.bold) {
             Log.d(TAG, "onClick: " + oetText.getEditText().getText());
 //            isBold = isBold? false : true;
+
             Objects.requireNonNull(oetText.getEditText().getText()).append("****");
             oetText.getEditText().setSelection(oetText.getEditText().getSelectionStart()-2);
         } else if (v.getId() == R.id.size) {
