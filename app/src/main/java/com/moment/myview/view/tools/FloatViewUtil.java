@@ -18,8 +18,6 @@ public class FloatViewUtil {
         util = new GetScreenWidthOrHeightUtil(activity);
     }
 
-
-
     public void setFloatView(View rootView, View targetView) {
         ViewTreeObserver.OnGlobalLayoutListener layoutListener = () -> {
             Rect rect = new Rect();

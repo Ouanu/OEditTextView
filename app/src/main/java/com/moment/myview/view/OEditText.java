@@ -10,13 +10,18 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.text.Editable;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
+import android.text.TextWatcher;
 import android.text.style.ImageSpan;
+import android.text.style.StyleSpan;
 import android.util.AttributeSet;
 
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.inputmethod.InputMethodManager;
@@ -37,6 +42,7 @@ public class OEditText extends androidx.appcompat.widget.AppCompatEditText {
     private float startY = 0.0f;
     private InputMethodManager im;
     private final StringBuilder desc = new StringBuilder();
+    private static int selectStart = 0;
 
 
     public OEditText(@NonNull @NotNull Context context) {
@@ -54,12 +60,13 @@ public class OEditText extends androidx.appcompat.widget.AppCompatEditText {
         initView();
     }
 
+
+
     private void initView() {
         this.setGravity(Gravity.START);
         im = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
         desc.append(this.getText());
         loadText(desc);
-
 
     }
 
@@ -124,5 +131,19 @@ public class OEditText extends androidx.appcompat.widget.AppCompatEditText {
             }
         }
         return super.onTouchEvent(event);
+    }
+
+    /**
+     * get Selection's location
+     * @param selStart location
+     */
+    @Override
+    protected void onSelectionChanged(int selStart, int selEnd) {
+        super.onSelectionChanged(selStart, selEnd);
+        selStart = selStart;
+    }
+
+    public static int getSelectStart() {
+        return selectStart;
     }
 }
