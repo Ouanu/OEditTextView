@@ -1,6 +1,11 @@
 package com.moment.myview.view;
 
 import android.content.Context;
+import android.graphics.Typeface;
+import android.text.Editable;
+import android.text.Spanned;
+import android.text.TextWatcher;
+import android.text.style.StyleSpan;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -15,6 +20,9 @@ public class OMDEditText extends androidx.appcompat.widget.AppCompatEditText {
 
     private float startY = 0.0f;
     private InputMethodManager im;
+    private OMDBoldTool boldTool;
+    private OMDItalyTool italyTool;
+    private String builder = "";
 
     public OMDEditText(@NonNull @NotNull Context context) {
         super(context);
@@ -34,7 +42,25 @@ public class OMDEditText extends androidx.appcompat.widget.AppCompatEditText {
     private void initView() {
         this.setGravity(Gravity.START);
         im = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        boldTool = new OMDBoldTool(this);
+        italyTool = new OMDItalyTool(this);
 
+        this.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                builder = s.toString();
+            }
+        });
     }
 
 
@@ -53,12 +79,18 @@ public class OMDEditText extends androidx.appcompat.widget.AppCompatEditText {
             if (endY - startY > 50.0f || startY - endY > 50.0f) {
                 this.setFocusable(false);   // lose the focus
                 im.hideSoftInputFromWindow(this.getApplicationWindowToken(), 0);
+                boldTool.applyOMDTool();
+                italyTool.applyOMDTool();
             } else {
                 this.setFocusable(true);    // focus back
                 this.setFocusableInTouchMode(true);
                 im.showSoftInput(this, 0);
+                StyleSpan styleSpan = new StyleSpan(Typeface.NORMAL);
+                this.setText(builder);
             }
         }
         return super.onTouchEvent(event);
     }
+
+
 }

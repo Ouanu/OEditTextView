@@ -1,5 +1,7 @@
 package com.moment.myview;
 
+import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -9,10 +11,20 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.moment.myview.view.OMDEditTextView;
 
+import java.util.Objects;
+
 public class MarkDownActivity extends AppCompatActivity implements View.OnClickListener {
 
 
     private OMDEditTextView oetText;
+    private static boolean isEditing = false;
+    private static boolean isBold = false;
+    TextView bold;
+    TextView size;
+    TextView italic;
+    TextView addTitle;
+    ImageView addList;
+    ImageView btnGetUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,15 +34,14 @@ public class MarkDownActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void initView() {
-
         oetText = (OMDEditTextView) findViewById(R.id.oet_text);
 
-        TextView bold = findViewById(R.id.bold);
-        TextView size = findViewById(R.id.size);
-        TextView italic = findViewById(R.id.italic);
-        TextView addTitle = findViewById(R.id.add_title);
-        ImageView addList = findViewById(R.id.add_list);
-        ImageView btnGetUri = findViewById(R.id.btn_get_uri);
+        bold = findViewById(R.id.bold);
+        size = findViewById(R.id.size);
+        italic = findViewById(R.id.italic);
+        addTitle = findViewById(R.id.add_title);
+        addList = findViewById(R.id.add_list);
+        btnGetUri = findViewById(R.id.btn_get_uri);
 
         bold.setOnClickListener(this);
         size.setOnClickListener(this);
@@ -39,30 +50,42 @@ public class MarkDownActivity extends AppCompatActivity implements View.OnClickL
         addList.setOnClickListener(this);
         btnGetUri.setOnClickListener(this);
 
+
     }
 
+
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bold:
+//                if (!isBold) {
+//                    isBold = true;
                 oetText.getEditText().getText().append("****");
-                oetText.getEditText().setSelection(oetText.getEditText().getSelectionStart() - 2);
+//                oetText.getEditText().setSelection(oetText.getEditText().getSelectionStart() - 2);
+//                    bold.setBackgroundColor(Color.BLUE);
+//                } else {
+//                    isBold = false;
+//                    bold.setBackgroundColor(Color.WHITE);
+//                    oetText.getEditText().setSelection(Objects.requireNonNull(oetText.getEditText().getText()).length());
+//                }
                 break;
             case R.id.add_title:
-                oetText.getEditText().getText().append("# ");
+                Objects.requireNonNull(oetText.getEditText().getText()).append("# ");
                 oetText.getEditText().setSelection(oetText.getEditText().getSelectionStart());
                 break;
             case R.id.italic:
-                oetText.getEditText().getText().append("**");
-                oetText.getEditText().setSelection(oetText.getEditText().getSelectionStart() + 1);
+                Objects.requireNonNull(oetText.getEditText().getText()).append(" **");
+                oetText.getEditText().setSelection(oetText.getEditText().getSelectionStart());
                 break;
             case R.id.add_list:
-                oetText.getEditText().getText().append("* ");
+                Objects.requireNonNull(oetText.getEditText().getText()).append("* ");
                 oetText.getEditText().setSelection(oetText.getEditText().getSelectionStart());
                 break;
             case R.id.btn_get_uri:
-                oetText.getEditText().getText().append("![picture alt](link \"title\")");
-                oetText.getEditText().setSelection(oetText.getEditText().getSelectionStart());
+//                oetText.getEditText().getText().append("![picture alt](link \"title\")");
+//                oetText.getEditText().setSelection(oetText.getEditText().getSelectionStart());
+
                 break;
             default:
                 break;
