@@ -23,8 +23,8 @@ public class OMDItalyTool extends OMDToolItem{
         while (matcher.find()) {
             Log.d("MATCHER", "applyOMDTool: " + matcher.group());
             getOetText().getText().setSpan(new StyleSpan(Typeface.ITALIC), matcher.start(), matcher.end(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            getOetText().getText().setSpan(new AbsoluteSizeSpan(0), matcher.start(), matcher.start()+2, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            getOetText().getText().setSpan(new AbsoluteSizeSpan(0), matcher.end()-2, matcher.end(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            getOetText().getText().setSpan(new AbsoluteSizeSpan(0), matcher.start(), matcher.start()+1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            getOetText().getText().setSpan(new AbsoluteSizeSpan(0), matcher.end()-1, matcher.end(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
     }
 }

@@ -59,24 +59,16 @@ public class MarkDownActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bold:
-//                if (!isBold) {
-//                    isBold = true;
-                oetText.getEditText().getText().append("****");
-//                oetText.getEditText().setSelection(oetText.getEditText().getSelectionStart() - 2);
-//                    bold.setBackgroundColor(Color.BLUE);
-//                } else {
-//                    isBold = false;
-//                    bold.setBackgroundColor(Color.WHITE);
-//                    oetText.getEditText().setSelection(Objects.requireNonNull(oetText.getEditText().getText()).length());
-//                }
+                oetText.getEditText().getText().insert(oetText.getEditText().getSelectionStart(), "****");
+                oetText.getEditText().setSelection(oetText.getEditText().getSelectionStart()-2);
                 break;
             case R.id.add_title:
                 Objects.requireNonNull(oetText.getEditText().getText()).append("# ");
                 oetText.getEditText().setSelection(oetText.getEditText().getSelectionStart());
                 break;
             case R.id.italic:
-                Objects.requireNonNull(oetText.getEditText().getText()).append(" **");
-                oetText.getEditText().setSelection(oetText.getEditText().getSelectionStart());
+                oetText.getEditText().getText().insert(oetText.getEditText().getSelectionStart(), "**");
+                oetText.getEditText().setSelection(oetText.getEditText().getSelectionStart()-1);
                 break;
             case R.id.add_list:
                 Objects.requireNonNull(oetText.getEditText().getText()).append("* ");
