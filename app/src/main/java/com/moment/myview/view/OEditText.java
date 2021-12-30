@@ -12,34 +12,34 @@ import android.view.inputmethod.InputMethodManager;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.moment.myview.view.tools.OMDAddListTool;
-import com.moment.myview.view.tools.OMDAddTitleTool;
-import com.moment.myview.view.tools.OMDBoldTool;
-import com.moment.myview.view.tools.OMDItalyTool;
+import com.moment.myview.view.tools.OListTool;
+import com.moment.myview.view.tools.OBoldTool;
+import com.moment.myview.view.tools.OItalyTool;
+import com.moment.myview.view.tools.OTitleTool;
 
 import org.jetbrains.annotations.NotNull;
 
-public class OMDEditText extends androidx.appcompat.widget.AppCompatEditText {
+public class OEditText extends androidx.appcompat.widget.AppCompatEditText {
 
     private float startY = 0.0f;
     private InputMethodManager im;
-    private OMDBoldTool boldTool;
-    private OMDItalyTool italyTool;
-    private OMDAddTitleTool addTitleTool;
-    private OMDAddListTool addListTool;
+    private OBoldTool boldTool;
+    private OItalyTool italyTool;
+    private OTitleTool titleTool;
+    private OListTool listTool;
     private String builder = "";
 
-    public OMDEditText(@NonNull @NotNull Context context) {
+    public OEditText(@NonNull @NotNull Context context) {
         super(context);
         initView();
     }
 
-    public OMDEditText(@NonNull @NotNull Context context, @Nullable @org.jetbrains.annotations.Nullable AttributeSet attrs) {
+    public OEditText(@NonNull @NotNull Context context, @Nullable @org.jetbrains.annotations.Nullable AttributeSet attrs) {
         super(context, attrs);
         initView();
     }
 
-    public OMDEditText(@NonNull @NotNull Context context, @Nullable @org.jetbrains.annotations.Nullable AttributeSet attrs, int defStyleAttr) {
+    public OEditText(@NonNull @NotNull Context context, @Nullable @org.jetbrains.annotations.Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initView();
     }
@@ -49,13 +49,12 @@ public class OMDEditText extends androidx.appcompat.widget.AppCompatEditText {
         this.setLineSpacing(10, 1.2f);
         this.setTextSize(20);
         im = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-        boldTool = new OMDBoldTool(this);
-        italyTool = new OMDItalyTool(this);
-        addTitleTool = new OMDAddTitleTool(this);
-        addListTool = new OMDAddListTool(this);
+        boldTool = new OBoldTool(this);
+        italyTool = new OItalyTool(this);
+        titleTool = new OTitleTool(this);
+        listTool = new OListTool(this);
 
         this.addTextChangedListener(new TextWatcher() {
-
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
@@ -90,8 +89,8 @@ public class OMDEditText extends androidx.appcompat.widget.AppCompatEditText {
                 im.hideSoftInputFromWindow(this.getApplicationWindowToken(), 0);
                 boldTool.applyOMDTool();
                 italyTool.applyOMDTool();
-                addTitleTool.applyOMDTool();
-                addListTool.applyOMDTool();
+                titleTool.applyOMDTool();
+                listTool.applyOMDTool();
             } else {
                 this.setFocusable(true);    // focus back
                 this.setFocusableInTouchMode(true);

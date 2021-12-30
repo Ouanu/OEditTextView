@@ -8,14 +8,14 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.moment.myview.view.OMDEditTextView;
+import com.moment.myview.view.OEditTextView;
 
 import java.util.Objects;
 
 public class MarkDownActivity extends AppCompatActivity implements View.OnClickListener {
 
 
-    private OMDEditTextView oetText;
+    private OEditTextView oetText;
     TextView bold;
     TextView size;
     TextView italic;

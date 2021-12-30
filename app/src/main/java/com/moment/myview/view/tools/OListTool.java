@@ -6,17 +6,17 @@ import android.text.style.AbsoluteSizeSpan;
 import android.text.style.BulletSpan;
 
 
-import com.moment.myview.view.OMDEditText;
+import com.moment.myview.view.OEditText;
 
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class OMDAddListTool extends OMDToolItem {
+public class OListTool extends OToolItem {
 
     private static final String REGEX = "(?m)^[\\s]*[-*+] +(.*)";
 
-    public OMDAddListTool(OMDEditText oetText) {
+    public OListTool(OEditText oetText) {
 
         super(oetText);
     }

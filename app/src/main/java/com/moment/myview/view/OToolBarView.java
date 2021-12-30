@@ -9,19 +9,19 @@ import androidx.annotation.Nullable;
 
 import com.moment.myview.R;
 
-public class OMDToolBar extends LinearLayout {
+public class OToolBarView extends LinearLayout {
 
-    public OMDToolBar(Context context) {
+    public OToolBarView(Context context) {
         super(context);
         initView();
     }
 
-    public OMDToolBar(Context context, @Nullable AttributeSet attrs) {
+    public OToolBarView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         initView();
     }
 
-    public OMDToolBar(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public OToolBarView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initView();
     }

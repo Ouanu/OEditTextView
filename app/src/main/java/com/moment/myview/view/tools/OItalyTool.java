@@ -6,17 +6,17 @@ import android.text.style.AbsoluteSizeSpan;
 import android.text.style.StyleSpan;
 
 
-import com.moment.myview.view.OMDEditText;
+import com.moment.myview.view.OEditText;
 
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class OMDItalyTool extends OMDToolItem {
+public class OItalyTool extends OToolItem {
 
     private final static String REGEX = "(\\*|__)(.*?)\\1";
 
-    public OMDItalyTool(OMDEditText oetText) {
+    public OItalyTool(OEditText oetText) {
         super(oetText);
     }
     @Override

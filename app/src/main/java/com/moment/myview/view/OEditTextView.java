@@ -5,31 +5,31 @@ import android.util.AttributeSet;
 import android.widget.ScrollView;
 
 
-public class OMDEditTextView extends ScrollView {
-    private OMDEditText editText;
+public class OEditTextView extends ScrollView {
+    private OEditText editText;
 
-    public OMDEditTextView(Context context) {
+    public OEditTextView(Context context) {
         super(context);
         initView();
     }
 
-    public OMDEditTextView(Context context, AttributeSet attrs) {
+    public OEditTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
         initView();
     }
 
-    public OMDEditTextView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public OEditTextView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initView();
     }
 
     private void initView() {
-        editText = new OMDEditText(getContext());
+        editText = new OEditText(getContext());
         editText.setMinHeight(600);
         this.addView(editText);
     }
 
-    public OMDEditText getEditText() {
+    public OEditText getEditText() {
         return editText;
     }
 
