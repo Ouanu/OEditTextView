@@ -1,9 +1,9 @@
 package com.moment.myview.view;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.text.style.StyleSpan;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -11,6 +11,11 @@ import android.view.inputmethod.InputMethodManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import com.moment.myview.view.tools.OMDAddListTool;
+import com.moment.myview.view.tools.OMDAddTitleTool;
+import com.moment.myview.view.tools.OMDBoldTool;
+import com.moment.myview.view.tools.OMDItalyTool;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -42,6 +47,7 @@ public class OMDEditText extends androidx.appcompat.widget.AppCompatEditText {
     private void initView() {
         this.setGravity(Gravity.START);
         this.setLineSpacing(10, 1.2f);
+        this.setTextSize(20);
         im = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
         boldTool = new OMDBoldTool(this);
         italyTool = new OMDItalyTool(this);
@@ -49,8 +55,6 @@ public class OMDEditText extends androidx.appcompat.widget.AppCompatEditText {
         addListTool = new OMDAddListTool(this);
 
         this.addTextChangedListener(new TextWatcher() {
-            int input_start;
-            int input_end;
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -58,17 +62,11 @@ public class OMDEditText extends androidx.appcompat.widget.AppCompatEditText {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                input_start = start;
-                input_end = start + count;
             }
 
             @Override
             public void afterTextChanged(Editable s) {
                 builder = s.toString();
-                if (input_end > input_start) {
-
-
-                }
             }
         });
     }
@@ -80,6 +78,7 @@ public class OMDEditText extends androidx.appcompat.widget.AppCompatEditText {
      * @param event Touch event
      * @return result
      */
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
@@ -102,6 +101,4 @@ public class OMDEditText extends androidx.appcompat.widget.AppCompatEditText {
         }
         return super.onTouchEvent(event);
     }
-
-
 }

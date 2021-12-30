@@ -1,8 +1,12 @@
-package com.moment.myview.view;
+package com.moment.myview.view.tools;
+
+import com.moment.myview.view.OMDEditText;
 
 public abstract class OMDToolItem {
-    private OMDEditText oetText;
+    private final OMDEditText oetText;
+
     public abstract void applyOMDTool();
+    public abstract void setStyle();
 
     public OMDToolItem(OMDEditText oetText) {
         this.oetText = oetText;
@@ -11,4 +15,6 @@ public abstract class OMDToolItem {
     public OMDEditText getOetText() {
         return oetText;
     }
+
+
 }

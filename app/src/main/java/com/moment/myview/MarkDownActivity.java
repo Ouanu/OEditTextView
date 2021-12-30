@@ -71,7 +71,7 @@ public class MarkDownActivity extends AppCompatActivity implements View.OnClickL
                 oetText.getEditText().setSelection(oetText.getEditText().getSelectionStart()-1);
                 break;
             case R.id.add_list:
-                Objects.requireNonNull(oetText.getEditText().getText()).append("* ");
+                oetText.getEditText().getText().insert(oetText.getEditText().getSelectionStart(), "* ");
                 oetText.getEditText().setSelection(oetText.getEditText().getSelectionStart());
                 break;
             case R.id.btn_get_uri:
