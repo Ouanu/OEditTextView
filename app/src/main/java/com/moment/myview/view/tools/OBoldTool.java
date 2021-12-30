@@ -31,7 +31,6 @@ public class OBoldTool extends OToolItem {
         Pattern p = Pattern.compile(REGEX);
         Matcher matcher = p.matcher(Objects.requireNonNull(getOetText().getText())); // 获取 matcher 对象
         while (matcher.find()) {
-            Log.d("MATCHER", "applyOMDTool: " + matcher.group());
             getOetText().getText().setSpan(new StyleSpan(Typeface.BOLD), matcher.start(), matcher.end(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             getOetText().getText().setSpan(new AbsoluteSizeSpan(0), matcher.start(), matcher.start()+2, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             getOetText().getText().setSpan(new AbsoluteSizeSpan(0), matcher.end()-2, matcher.end(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);

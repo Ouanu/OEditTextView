@@ -8,14 +8,10 @@ import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.inputmethod.InputMethodManager;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
-import com.moment.myview.view.tools.OListTool;
-import com.moment.myview.view.tools.OBoldTool;
-import com.moment.myview.view.tools.OItalyTool;
-import com.moment.myview.view.tools.OTitleTool;
+import com.moment.myview.view.tools.OToolItem;
+import com.moment.myview.view.tools.OTools;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -23,11 +19,8 @@ public class OEditText extends androidx.appcompat.widget.AppCompatEditText {
 
     private float startY = 0.0f;
     private InputMethodManager im;
-    private OBoldTool boldTool;
-    private OItalyTool italyTool;
-    private OTitleTool titleTool;
-    private OListTool listTool;
-    private String builder = "";
+    private OTools oTools;
+    private StringBuilder builder = new StringBuilder();
 
     public OEditText(@NonNull @NotNull Context context) {
         super(context);
@@ -49,10 +42,8 @@ public class OEditText extends androidx.appcompat.widget.AppCompatEditText {
         this.setLineSpacing(10, 1.2f);
         this.setTextSize(20);
         im = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-        boldTool = new OBoldTool(this);
-        italyTool = new OItalyTool(this);
-        titleTool = new OTitleTool(this);
-        listTool = new OListTool(this);
+        oTools = new OTools(this);
+        oTools.autoTool();
 
         this.addTextChangedListener(new TextWatcher() {
             @Override
@@ -65,7 +56,7 @@ public class OEditText extends androidx.appcompat.widget.AppCompatEditText {
 
             @Override
             public void afterTextChanged(Editable s) {
-                builder = s.toString();
+                builder.replace(0, builder.length(), s.toString());
             }
         });
     }
@@ -80,17 +71,22 @@ public class OEditText extends androidx.appcompat.widget.AppCompatEditText {
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        long preTime = 0;
+        long nowTime = 0;
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
             startY = event.getY(); // Get the position y when you click it at the first time
+            preTime = System.currentTimeMillis();
+
         } else if (event.getAction() == MotionEvent.ACTION_UP) {
             float endY = event.getY();    // get the end position y when you hand up your finger
-            if (endY - startY > 50.0f || startY - endY > 50.0f) {
+            nowTime = System.currentTimeMillis();
+            if ((endY - startY > 50.0f || startY - endY > 50.0f)) {
                 this.setFocusable(false);   // lose the focus
                 im.hideSoftInputFromWindow(this.getApplicationWindowToken(), 0);
-                boldTool.applyOMDTool();
-                italyTool.applyOMDTool();
-                titleTool.applyOMDTool();
-                listTool.applyOMDTool();
+                for (OToolItem oToolItem : oTools.getToolList()) {
+                    oToolItem.applyOMDTool();
+                }
+
             } else {
                 this.setFocusable(true);    // focus back
                 this.setFocusableInTouchMode(true);

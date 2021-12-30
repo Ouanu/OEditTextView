@@ -7,13 +7,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.moment.myview.view.OEditTextView;
-
 import java.util.Objects;
 
 public class MarkDownActivity extends AppCompatActivity implements View.OnClickListener {
-
 
     private OEditTextView oetText;
     TextView bold;

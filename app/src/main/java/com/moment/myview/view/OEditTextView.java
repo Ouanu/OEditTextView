@@ -1,7 +1,9 @@
 package com.moment.myview.view;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.AttributeSet;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
 
@@ -25,6 +27,7 @@ public class OEditTextView extends ScrollView {
 
     private void initView() {
         editText = new OEditText(getContext());
+        editText.setBackgroundColor(Color.WHITE);
         editText.setMinHeight(600);
         this.addView(editText);
     }

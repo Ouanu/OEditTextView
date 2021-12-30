@@ -32,7 +32,6 @@ public class OTitleTool extends OToolItem {
 
         Matcher matcher = p.matcher(Objects.requireNonNull(getOetText().getText())); // 获取 matcher 对象
         while (matcher.find()) {
-            Log.d("OMDAddTitleTool", "applyOMDTool: " + matcher.start() + " " + matcher.end());
             getOetText().getText().setSpan(new StyleSpan(Typeface.BOLD), matcher.start(), matcher.end(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             getOetText().getText().setSpan(new AbsoluteSizeSpan(80), matcher.start() + 1, matcher.end(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             getOetText().getText().setSpan(new AbsoluteSizeSpan(0), matcher.start(), matcher.start() + 2, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
