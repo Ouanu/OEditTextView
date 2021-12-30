@@ -18,16 +18,6 @@
         android:clickable="true"
         android:textSize="22sp"/>
 
-    <TextView
-        android:id="@+id/size"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:text="@string/s"
-        android:textColor="@color/black"
-        android:fontFamily="sans-serif-black"
-        android:textSize="22sp"/>
 
     <TextView
         android:id="@+id/italic"

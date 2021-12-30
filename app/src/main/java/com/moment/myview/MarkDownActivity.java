@@ -17,7 +17,6 @@ public class MarkDownActivity extends AppCompatActivity implements View.OnClickL
 
     private OEditTextView oetText;
     TextView bold;
-    TextView size;
     TextView italic;
     TextView addTitle;
     ImageView addList;
@@ -34,14 +33,12 @@ public class MarkDownActivity extends AppCompatActivity implements View.OnClickL
         oetText = findViewById(R.id.oet_text);
 
         bold = findViewById(R.id.bold);
-        size = findViewById(R.id.size);
         italic = findViewById(R.id.italic);
         addTitle = findViewById(R.id.add_title);
         addList = findViewById(R.id.add_list);
         btnGetUri = findViewById(R.id.btn_get_uri);
 
         bold.setOnClickListener(this);
-        size.setOnClickListener(this);
         italic.setOnClickListener(this);
         addTitle.setOnClickListener(this);
         addList.setOnClickListener(this);
