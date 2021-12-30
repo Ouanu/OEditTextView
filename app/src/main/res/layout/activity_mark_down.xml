@@ -11,7 +11,7 @@
         android:layout_marginBottom="60dp"
         android:scrollbars="none" />
 
-    <com.moment.myview.view.OToolBar
+    <com.moment.myview.view.OMDToolBar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

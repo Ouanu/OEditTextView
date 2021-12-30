@@ -9,7 +9,7 @@ import androidx.annotation.Nullable;
 
 import com.moment.myview.R;
 
-public class OMDToolBar extends LinearLayout{
+public class OMDToolBar extends LinearLayout {
 
     public OMDToolBar(Context context) {
         super(context);

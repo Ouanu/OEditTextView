@@ -1,7 +1,6 @@
 package com.moment.myview;
 
 import android.annotation.SuppressLint;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -17,8 +16,6 @@ public class MarkDownActivity extends AppCompatActivity implements View.OnClickL
 
 
     private OMDEditTextView oetText;
-    private static boolean isEditing = false;
-    private static boolean isBold = false;
     TextView bold;
     TextView size;
     TextView italic;
@@ -34,7 +31,7 @@ public class MarkDownActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void initView() {
-        oetText = (OMDEditTextView) findViewById(R.id.oet_text);
+        oetText = findViewById(R.id.oet_text);
 
         bold = findViewById(R.id.bold);
         size = findViewById(R.id.size);
@@ -59,25 +56,20 @@ public class MarkDownActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bold:
-                oetText.getEditText().getText().insert(oetText.getEditText().getSelectionStart(), "****");
-                oetText.getEditText().setSelection(oetText.getEditText().getSelectionStart()-2);
+                Objects.requireNonNull(oetText.getEditText().getText()).insert(oetText.getEditText().getSelectionStart(), "****");
+                oetText.getEditText().setSelection(oetText.getEditText().getSelectionStart() - 2);
                 break;
             case R.id.add_title:
-                Objects.requireNonNull(oetText.getEditText().getText()).append("# ");
+                Objects.requireNonNull(oetText.getEditText().getText()).append("\n# ");
                 oetText.getEditText().setSelection(oetText.getEditText().getSelectionStart());
                 break;
             case R.id.italic:
-                oetText.getEditText().getText().insert(oetText.getEditText().getSelectionStart(), "**");
-                oetText.getEditText().setSelection(oetText.getEditText().getSelectionStart()-1);
+                Objects.requireNonNull(oetText.getEditText().getText()).insert(oetText.getEditText().getSelectionStart(), "**");
+                oetText.getEditText().setSelection(oetText.getEditText().getSelectionStart() - 1);
                 break;
             case R.id.add_list:
-                oetText.getEditText().getText().insert(oetText.getEditText().getSelectionStart(), "* ");
+                Objects.requireNonNull(oetText.getEditText().getText()).insert(oetText.getEditText().getSelectionStart(), "* ");
                 oetText.getEditText().setSelection(oetText.getEditText().getSelectionStart());
-                break;
-            case R.id.btn_get_uri:
-//                oetText.getEditText().getText().append("![picture alt](link \"title\")");
-//                oetText.getEditText().setSelection(oetText.getEditText().getSelectionStart());
-
                 break;
             default:
                 break;
