@@ -1,6 +1,6 @@
-package com.moment.myview.view.tools;
+package com.moment.oetlib.view.tools;
 
-import com.moment.myview.view.OEditText;
+import com.moment.oetlib.view.OEditText;
 
 import java.util.ArrayList;
 import java.util.List;

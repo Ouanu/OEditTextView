@@ -1,4 +1,4 @@
-package com.moment.myview.view;
+package com.moment.oetlib.view;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -6,7 +6,6 @@ import android.graphics.Rect;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.ViewTreeObserver;
@@ -15,13 +14,12 @@ import android.view.inputmethod.InputMethodManager;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.moment.myview.view.tools.GetScreenWidthOrHeightUtil;
-import com.moment.myview.view.tools.OToolItem;
-import com.moment.myview.view.tools.OTools;
+import com.moment.oetlib.view.tools.GetScreenWidthOrHeightUtil;
+import com.moment.oetlib.view.tools.OToolItem;
+import com.moment.oetlib.view.tools.OTools;
 
 import org.jetbrains.annotations.NotNull;
 
-import static android.view.inputmethod.EditorInfo.IME_ACTION_NONE;
 
 public class OEditText extends androidx.appcompat.widget.AppCompatEditText {
 

@@ -4,14 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.moment.myview.view.OEditTextView
+    <com.moment.oetlib.view.OEditTextView
         android:id="@+id/oet_text"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="60dp"
         android:scrollbars="none" />
 
-    <com.moment.myview.view.OToolBarView
+
+    <com.moment.oetlib.view.OToolBarView
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -1,15 +1,15 @@
 package com.moment.myview;
 
 import android.annotation.SuppressLint;
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import com.moment.myview.view.OEditTextView;
+
+import com.moment.oetlib.view.OEditTextView;
+
 import java.util.Objects;
 
 public class MarkDownActivity extends AppCompatActivity implements View.OnClickListener {

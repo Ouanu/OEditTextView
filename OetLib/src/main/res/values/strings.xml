@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">MyView</string>
+    <string name="dir_images">/data/user/0/com.moment.whynote/files/images</string>
+    <string name="b">B</string>
+    <string name="s">S</string>
+    <string name="i">I</string>
+    <string name="t">T</string>
+    <string name="add_list">Add List</string>
+    <string name="add_picture">Add Picture</string>
+</resources>

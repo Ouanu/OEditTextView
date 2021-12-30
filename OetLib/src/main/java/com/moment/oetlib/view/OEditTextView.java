@@ -1,9 +1,8 @@
-package com.moment.myview.view;
+package com.moment.oetlib.view;
 
 import android.content.Context;
 import android.graphics.Color;
 import android.util.AttributeSet;
-import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
 

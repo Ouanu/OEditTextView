@@ -1,9 +1,7 @@
-package com.moment.myview.view.tools;
+package com.moment.oetlib.view.tools;
 
 import android.app.Activity;
-
 import android.graphics.Rect;
-
 import android.view.View;
 import android.view.ViewTreeObserver;
 

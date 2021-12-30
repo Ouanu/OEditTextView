@@ -1,13 +1,12 @@
-package com.moment.myview.view.tools;
+package com.moment.oetlib.view.tools;
 
 import android.graphics.Typeface;
 import android.text.Spanned;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.StyleSpan;
-import android.util.Log;
 
 
-import com.moment.myview.view.OEditText;
+import com.moment.oetlib.view.OEditText;
 
 import java.util.Objects;
 import java.util.regex.Matcher;

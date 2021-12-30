@@ -1,2 +1,3 @@
 rootProject.name = "MyView"
 include ':app'
+include ':OetLib'

@@ -1,6 +1,7 @@
-package com.moment.myview.view.tools;
+package com.moment.oetlib.view.tools;
 
-import com.moment.myview.view.OEditText;
+
+import com.moment.oetlib.view.OEditText;
 
 public abstract class OToolItem {
     private final OEditText oetText;

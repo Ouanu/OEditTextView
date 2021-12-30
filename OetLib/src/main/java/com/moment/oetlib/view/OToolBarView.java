@@ -1,4 +1,4 @@
-package com.moment.myview.view;
+package com.moment.oetlib.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -7,7 +7,8 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
 
-import com.moment.myview.R;
+import com.moment.oetlib.R;
+
 
 public class OToolBarView extends LinearLayout {
 
