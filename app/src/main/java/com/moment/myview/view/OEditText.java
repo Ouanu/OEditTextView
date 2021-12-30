@@ -2,18 +2,26 @@ package com.moment.myview.view;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Rect;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
+import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import com.moment.myview.view.tools.GetScreenWidthOrHeightUtil;
 import com.moment.myview.view.tools.OToolItem;
 import com.moment.myview.view.tools.OTools;
 
 import org.jetbrains.annotations.NotNull;
+
+import static android.view.inputmethod.EditorInfo.IME_ACTION_NONE;
 
 public class OEditText extends androidx.appcompat.widget.AppCompatEditText {
 
@@ -21,6 +29,10 @@ public class OEditText extends androidx.appcompat.widget.AppCompatEditText {
     private InputMethodManager im;
     private OTools oTools;
     private StringBuilder builder = new StringBuilder();
+    private long startTime = 0;
+    private long time = 0;
+    private GetScreenWidthOrHeightUtil util;
+    private static int selectStart = 0;
 
     public OEditText(@NonNull @NotNull Context context) {
         super(context);
@@ -59,6 +71,23 @@ public class OEditText extends androidx.appcompat.widget.AppCompatEditText {
                 builder.replace(0, builder.length(), s.toString());
             }
         });
+
+        util = new GetScreenWidthOrHeightUtil(getContext());
+
+        ViewTreeObserver.OnGlobalLayoutListener listener = () -> {
+            Rect rect = new Rect();
+            this.getWindowVisibleDisplayFrame(rect);
+//            activity.getWindow().getDecorView().getWindowVisibleDisplayFrame(rect);
+            int height = util.getScreenHeight() - rect.bottom;
+            boolean isShowing = height > util.getScreenHeight() / 5;
+            if (isShowing) {
+
+            } else {
+
+            }
+        };
+        this.getViewTreeObserver().addOnGlobalLayoutListener(listener);
+
     }
 
 
@@ -71,27 +100,28 @@ public class OEditText extends androidx.appcompat.widget.AppCompatEditText {
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        long preTime = 0;
-        long nowTime = 0;
+
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
             startY = event.getY(); // Get the position y when you click it at the first time
-            preTime = System.currentTimeMillis();
-
+            startTime = System.currentTimeMillis();
         } else if (event.getAction() == MotionEvent.ACTION_UP) {
+            selectStart = this.getSelectionStart();
+            time = System.currentTimeMillis() - startTime;
             float endY = event.getY();    // get the end position y when you hand up your finger
-            nowTime = System.currentTimeMillis();
             if ((endY - startY > 50.0f || startY - endY > 50.0f)) {
                 this.setFocusable(false);   // lose the focus
+                this.setFocusableInTouchMode(false);
                 im.hideSoftInputFromWindow(this.getApplicationWindowToken(), 0);
                 for (OToolItem oToolItem : oTools.getToolList()) {
                     oToolItem.applyOMDTool();
                 }
-
-            } else {
+            } else if ((endY - startY < 50.0f || startY - endY < 50.0f) && time < 500){
                 this.setFocusable(true);    // focus back
                 this.setFocusableInTouchMode(true);
                 im.showSoftInput(this, 0);
                 this.setText(builder);
+//                this.setSelection(selectStart);
+
             }
         }
         return super.onTouchEvent(event);
