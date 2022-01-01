@@ -56,9 +56,9 @@ public class OEditText extends androidx.appcompat.widget.AppCompatEditText {
         /*
         if you wanna use the default, you can uncomment these two lines
          */
-//        oTools.autoTool();
+        oTools.autoTool();
         this.addTextChangedListener(textWatcher);
-//        this.setOnTouchListener(setTouchEvent);
+        this.setOnTouchListener(setTouchEvent);
     }
 
 

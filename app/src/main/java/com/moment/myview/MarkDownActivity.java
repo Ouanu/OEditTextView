@@ -1,6 +1,7 @@
 package com.moment.myview;
 
 import android.annotation.SuppressLint;
+import android.content.ContentResolver;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -20,6 +21,7 @@ public class MarkDownActivity extends AppCompatActivity implements View.OnClickL
     TextView addTitle;
     ImageView addList;
     ImageView btnGetUri;
+    private ContentResolver resolver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,8 @@ public class MarkDownActivity extends AppCompatActivity implements View.OnClickL
     private void initView() {
         oetText = findViewById(R.id.oet_text);
 
+        resolver = getContentResolver();
+        
         bold = findViewById(R.id.bold);
         italic = findViewById(R.id.italic);
         addTitle = findViewById(R.id.add_title);
