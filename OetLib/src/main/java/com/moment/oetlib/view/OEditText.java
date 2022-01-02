@@ -51,7 +51,7 @@ public class OEditText extends androidx.appcompat.widget.AppCompatEditText {
         this.setTextSize(20);
 
         im = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-        oTools = new OTools(this);
+        oTools = new OTools(this,getContext().getContentResolver());
 
         /*
         if you wanna use the default, you can uncomment these two lines
@@ -87,6 +87,7 @@ public class OEditText extends androidx.appcompat.widget.AppCompatEditText {
                     for (OToolItem oToolItem : oTools.getToolList()) {
                         oToolItem.applyOMDTool();
                     }
+
                 } else if ((endY - startY < 50.0f || startY - endY < 50.0f) && time < 500){
                     v.setFocusable(true);    // focus back
                     v.setFocusableInTouchMode(true);

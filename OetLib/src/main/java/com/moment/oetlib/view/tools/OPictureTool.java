@@ -38,7 +38,7 @@ public class OPictureTool extends OToolItem {
         Matcher matcher = p.matcher(Objects.requireNonNull(getOetText().getText())); // 获取 matcher 对象
         while (matcher.find()) {
             try {
-                image = MediaStore.Images.Media.getBitmap(resolver, Uri.parse(matcher.group(1)));
+                image = MediaStore.Images.Media.getBitmap(getOetText().getContext().getContentResolver(), Uri.parse(matcher.group(1)));
                 int width = image.getWidth();
                 int height = image.getHeight();
                 // 计算缩放比例.

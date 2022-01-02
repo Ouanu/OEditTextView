@@ -1,5 +1,7 @@
 package com.moment.oetlib.view.tools;
 
+import android.content.ContentResolver;
+
 import com.moment.oetlib.view.OEditText;
 
 import java.util.ArrayList;
@@ -8,9 +10,11 @@ import java.util.List;
 public class OTools {
     private final List<OToolItem> toolItemList = new ArrayList<>();
     private OEditText oetText;
+    private ContentResolver resolver;
 
-    public OTools(OEditText oetText) {
+    public OTools(OEditText oetText, ContentResolver resolver) {
         this.oetText = oetText;
+        this.resolver = resolver;
     }
 
     /*
@@ -21,12 +25,10 @@ public class OTools {
         OItalyTool italyTool = new OItalyTool(oetText);
         OTitleTool titleTool = new OTitleTool(oetText);
         OListTool listTool = new OListTool(oetText);
-        OPictureTool pictureTool = new OPictureTool(oetText);
         toolItemList.add(boldTool);
         toolItemList.add(italyTool);
         toolItemList.add(titleTool);
         toolItemList.add(listTool);
-        toolItemList.add(pictureTool);
     }
 
     public void addToolItem(OToolItem toolItem) {

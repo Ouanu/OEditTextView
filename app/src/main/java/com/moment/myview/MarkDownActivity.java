@@ -2,14 +2,19 @@ package com.moment.myview;
 
 import android.annotation.SuppressLint;
 import android.content.ContentResolver;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.moment.oetlib.view.OEditTextView;
+import com.moment.oetlib.view.OToolBarView;
+import com.moment.oetlib.view.tools.OPictureTool;
 
 import java.util.Objects;
 
@@ -22,11 +27,16 @@ public class MarkDownActivity extends AppCompatActivity implements View.OnClickL
     ImageView addList;
     ImageView btnGetUri;
     private ContentResolver resolver;
+    private int startSelect;
+
+
+    private OToolBarView toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mark_down);
+
         initView();
     }
 
@@ -34,7 +44,7 @@ public class MarkDownActivity extends AppCompatActivity implements View.OnClickL
         oetText = findViewById(R.id.oet_text);
 
         resolver = getContentResolver();
-        
+
         bold = findViewById(R.id.bold);
         italic = findViewById(R.id.italic);
         addTitle = findViewById(R.id.add_title);
@@ -46,6 +56,7 @@ public class MarkDownActivity extends AppCompatActivity implements View.OnClickL
         addTitle.setOnClickListener(this);
         addList.setOnClickListener(this);
         btnGetUri.setOnClickListener(this);
+        toolbar = findViewById(R.id.toolbar);
 
 
     }
@@ -71,10 +82,13 @@ public class MarkDownActivity extends AppCompatActivity implements View.OnClickL
                 Objects.requireNonNull(oetText.getEditText().getText()).insert(oetText.getEditText().getSelectionStart(), "* ");
                 oetText.getEditText().setSelection(oetText.getEditText().getSelectionStart());
                 break;
+            case R.id.btn_get_uri:
+                startSelect = oetText.getEditText().getSelectionStart();
+
             default:
                 break;
-
         }
 
     }
+
 }
