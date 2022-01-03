@@ -25,12 +25,12 @@ public class OTools {
         OItalyTool italyTool = new OItalyTool(oetText);
         OTitleTool titleTool = new OTitleTool(oetText);
         OListTool listTool = new OListTool(oetText);
-        OPictureTool pictureTool = new OPictureTool(oetText);
+        OPictureTool pictureTool = new OPictureTool(oetText, resolver);
         toolItemList.add(boldTool);
         toolItemList.add(italyTool);
         toolItemList.add(titleTool);
         toolItemList.add(listTool);
-//        toolItemList.add(pictureTool);
+        toolItemList.add(pictureTool);
     }
 
     public void addToolItem(OToolItem toolItem) {

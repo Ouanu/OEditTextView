@@ -2,33 +2,24 @@ package com.moment.myview;
 
 import android.annotation.SuppressLint;
 import android.content.ContentResolver;
-import android.content.ContentUris;
-import android.content.Context;
-import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.DocumentsContract;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContract;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.moment.oetlib.view.OEditTextView;
 import com.moment.oetlib.view.OToolBarView;
 import com.moment.oetlib.view.tools.OPictureTool;
 
-import org.jetbrains.annotations.NotNull;
-
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Objects;
 
@@ -42,13 +33,30 @@ public class MarkDownActivity extends AppCompatActivity implements View.OnClickL
     ImageView btnGetUri;
     private ContentResolver resolver;
     private int startSelect;
+    private Bitmap bitmap;
+    private String DcimPath = "";
 
     // Activity返回结果
     private final ActivityResultLauncher<String> mGetContent = registerForActivityResult(
             new ActivityResultContracts.GetContent(),
             result -> {
                 try {
-                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), result);
+                    bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), result);
+                    File saveFile = new File(DcimPath, System.currentTimeMillis() + ".jpg");
+
+                    try {
+                        FileOutputStream saveImgOut = new FileOutputStream(saveFile);
+                        // compress - 压缩的意思
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 80, saveImgOut);
+                        //存储完成后需要清除相关的进程
+                        saveImgOut.flush();
+                        saveImgOut.close();
+                        Log.d("Save Bitmap", "The picture is save to your phone!");
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                    oetText.getEditText().getText().insert(startSelect, "![Image](" + Uri.fromFile(saveFile) + " \"Image\")");
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -57,13 +65,17 @@ public class MarkDownActivity extends AppCompatActivity implements View.OnClickL
 
 
     private OToolBarView toolbar;
+    private ImageView ivSet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mark_down);
-
+//        DcimPath = getFilesDir() + "/DCIM";
+        DcimPath = getApplicationContext().getFilesDir().getAbsolutePath() + "/DCIM";
+        Log.d("PATH++++", "onCreate: " + DcimPath);
         initView();
+        fileInit();
     }
 
     private void initView() {
@@ -83,10 +95,17 @@ public class MarkDownActivity extends AppCompatActivity implements View.OnClickL
         addList.setOnClickListener(this);
         btnGetUri.setOnClickListener(this);
         toolbar = findViewById(R.id.toolbar);
+        ivSet = findViewById(R.id.iv_set);
 
 
     }
 
+    public void fileInit() {
+        File file = new File(DcimPath);
+        if (!file.exists() && !file.isDirectory()) {
+            file.mkdirs();
+        }
+    }
 
     @SuppressLint("NonConstantResourceId")
     @Override
@@ -111,54 +130,10 @@ public class MarkDownActivity extends AppCompatActivity implements View.OnClickL
             case R.id.btn_get_uri:
                 startSelect = oetText.getEditText().getSelectionStart();
                 mGetContent.launch("image/*");
+                ivSet.setImageBitmap(bitmap);
             default:
                 break;
         }
 
     }
-
-    // 解析uri，获取图片真实地址
-    private String parseImageUri(Uri uri) {
-        String imagePath = null;
-
-        if (DocumentsContract.isDocumentUri(this, uri)) {
-            String docId = DocumentsContract.getDocumentId(uri);
-
-
-            if ("com.android.providers.media.documents".equals(uri.getAuthority())) {
-                String id = docId.split(":")[1];
-                String selection = MediaStore.Images.Media._ID + "=" + id;
-                imagePath = getImagePath(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, selection);
-            } else if ("com.android.providers.downloads.documents".equals(uri.getAuthority())) {
-                Uri contentUri = ContentUris.withAppendedId(Uri.parse("content://downloads/public_downloads"), Long.parseLong(docId));
-                imagePath = getImagePath(contentUri, null);
-            }
-        } else if ("content".equalsIgnoreCase(uri.getScheme())) {   // content://com.miui.gallery.open/raw/%2Fstorage%2Femulated%2F0%2FDCIM%2FScreenshots%2FScreenshot_2020-10-25-14-43-57-798_com.miui.home.jpg
-
-
-            imagePath = getImagePath(uri, null);
-        } else if ("file".equalsIgnoreCase(uri.getScheme())) {
-
-
-            imagePath = uri.getPath();
-        }
-
-
-        return imagePath;
-    }
-
-    // 获取真实图片地址
-    private String getImagePath(Uri uri, String selection) {
-        String path = null;
-        Cursor cursor = getContentResolver().query(uri, null, selection, null, null);
-        if (cursor != null) {
-            if (cursor.moveToFirst()) {
-                path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
-            }
-            cursor.close();
-        }
-        return path;
-    }
-
-
 }

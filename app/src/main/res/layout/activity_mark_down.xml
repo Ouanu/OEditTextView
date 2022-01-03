@@ -4,6 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageView
+        android:id="@+id/iv_set"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="fitCenter"/>
+
     <com.moment.oetlib.view.OEditTextView
         android:id="@+id/oet_text"
         android:layout_width="match_parent"

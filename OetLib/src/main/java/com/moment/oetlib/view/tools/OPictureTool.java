@@ -1,11 +1,13 @@
 package com.moment.oetlib.view.tools;
 
 import android.content.ContentResolver;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.text.Spannable;
 import android.text.Spanned;
 import android.text.style.ImageSpan;
 import android.util.Log;
@@ -21,11 +23,12 @@ public class OPictureTool extends OToolItem {
 
     private static final String REGEX = "!\\[[^]]*]\\((?<filename>.*?)(?=[\")])(?<optionalpart>\".*\")?\\)";
     private Bitmap image;
+    private ContentResolver resolver;
 
 
-    public OPictureTool(OEditText oetText) {
+    public OPictureTool(OEditText oetText, ContentResolver resolver) {
         super(oetText);
-
+        this.resolver = resolver;
     }
 
     @Override
@@ -39,19 +42,23 @@ public class OPictureTool extends OToolItem {
         Matcher matcher = p.matcher(Objects.requireNonNull(getOetText().getText())); // 获取 matcher 对象
         while (matcher.find()) {
             Log.d("PIC", "setStyle: " + matcher.group(1));
-            image = BitmapFactory.decodeFile(matcher.group(1));
-            int width = image.getWidth();
-            int height = image.getHeight();
-            // 计算缩放比例.
-            float k = ((float) 640) / width;
-            // 取得想要缩放的matrix参数.
-            Matrix matrix = new Matrix();
-            matrix.postScale(k, k);
-            getOetText().getText().setSpan(new ImageSpan(getOetText().getContext(),
-                    Bitmap.createBitmap(image, 0, 0, width, height, matrix, true)),
-                    matcher.start(),
-                    matcher.end(),
-                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            try {
+                image = MediaStore.Images.Media.getBitmap(resolver, Uri.parse(matcher.group(1)));
+                int width = image.getWidth();
+                int height = image.getHeight();
+                // 计算缩放比例.
+                float k = ((float) 640) / width;
+                // 取得想要缩放的matrix参数.
+                Matrix matrix = new Matrix();
+                matrix.postScale(k, k);
+                // 得到新的图片.
+                Bitmap newBitmap = Bitmap.createBitmap(image, 0, 0, width, height, matrix, true);
+                getOetText().getText().setSpan(
+                        new ImageSpan(getOetText().getContext(), newBitmap), matcher.start(), matcher.end(),
+                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
         }
     }
