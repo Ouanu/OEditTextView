@@ -14,6 +14,7 @@ import android.util.Log;
 
 import com.moment.oetlib.view.OEditText;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
 import java.util.regex.Matcher;
@@ -41,9 +42,10 @@ public class OPictureTool extends OToolItem {
         Pattern p = Pattern.compile(REGEX);
         Matcher matcher = p.matcher(Objects.requireNonNull(getOetText().getText())); // 获取 matcher 对象
         while (matcher.find()) {
-            Log.d("PIC", "setStyle: " + matcher.group(1));
+//            Log.d("PIC", "setStyle: " + matcher.group(1));
             try {
-                image = MediaStore.Images.Media.getBitmap(resolver, Uri.parse(matcher.group(1)));
+                image = MediaStore.Images.Media.getBitmap(getOetText().getContext().getContentResolver(), Uri.parse(matcher.group(1)));
+//                image = BitmapFactory.decodeFile(matcher.group(1));
                 int width = image.getWidth();
                 int height = image.getHeight();
                 // 计算缩放比例.

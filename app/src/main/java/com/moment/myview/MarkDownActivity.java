@@ -55,23 +55,19 @@ public class MarkDownActivity extends AppCompatActivity implements View.OnClickL
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }
-                    oetText.getEditText().getText().insert(startSelect, "![Image](" + Uri.fromFile(saveFile) + " \"Image\")");
-
+                    oetText.getEditText().getText().insert(startSelect, "![Image](" + saveFile.getAbsolutePath() + " \"Image\")");
+                    oetText.getEditText().getOTools().addToolItem(new OPictureTool(oetText.getEditText(), resolver));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
     );
-
-
     private OToolBarView toolbar;
-    private ImageView ivSet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mark_down);
-//        DcimPath = getFilesDir() + "/DCIM";
         DcimPath = getApplicationContext().getFilesDir().getAbsolutePath() + "/DCIM";
         Log.d("PATH++++", "onCreate: " + DcimPath);
         initView();
@@ -95,7 +91,7 @@ public class MarkDownActivity extends AppCompatActivity implements View.OnClickL
         addList.setOnClickListener(this);
         btnGetUri.setOnClickListener(this);
         toolbar = findViewById(R.id.toolbar);
-        ivSet = findViewById(R.id.iv_set);
+
 
 
     }
@@ -130,7 +126,6 @@ public class MarkDownActivity extends AppCompatActivity implements View.OnClickL
             case R.id.btn_get_uri:
                 startSelect = oetText.getEditText().getSelectionStart();
                 mGetContent.launch("image/*");
-                ivSet.setImageBitmap(bitmap);
             default:
                 break;
         }

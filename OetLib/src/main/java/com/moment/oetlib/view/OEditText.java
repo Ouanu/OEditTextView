@@ -28,10 +28,12 @@ public class OEditText extends androidx.appcompat.widget.AppCompatEditText {
     private OTools oTools;
     private final StringBuilder builder = new StringBuilder();
     private long startTime = 0;
+    private Context context;
 
     public OEditText(@NonNull @NotNull Context context) {
         super(context);
         initView();
+        this.context = context;
     }
 
     public OEditText(@NonNull @NotNull Context context, @Nullable @org.jetbrains.annotations.Nullable AttributeSet attrs) {
@@ -51,7 +53,7 @@ public class OEditText extends androidx.appcompat.widget.AppCompatEditText {
         this.setTextSize(20);
 
         im = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-        oTools = new OTools(this,getContext().getContentResolver());
+        oTools = new OTools(this, getContext().getContentResolver());
 
         /*
         if you wanna use the default, you can uncomment these two lines
