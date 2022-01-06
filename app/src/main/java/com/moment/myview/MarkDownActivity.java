@@ -7,6 +7,8 @@ import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Spanned;
+import android.text.style.ImageSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -22,6 +24,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class MarkDownActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -35,6 +39,7 @@ public class MarkDownActivity extends AppCompatActivity implements View.OnClickL
     private int startSelect;
     private Bitmap bitmap;
     private String DcimPath = "";
+    private static final String REGEX = "!\\[[^]]*]\\((?<filename>.*?)(?=[\")])(?<optionalpart>\".*\")?\\)";
 
     // Activity返回结果
     private final ActivityResultLauncher<String> mGetContent = registerForActivityResult(
@@ -55,8 +60,9 @@ public class MarkDownActivity extends AppCompatActivity implements View.OnClickL
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }
-                    oetText.getEditText().getText().insert(startSelect, "![Image](" + saveFile.getAbsolutePath() + " \"Image\")");
-                    oetText.getEditText().getOTools().addToolItem(new OPictureTool(oetText.getEditText(), resolver));
+                    oetText.getEditText().getText().insert(startSelect, "![Image](" + Uri.fromFile(saveFile) + "\"Image\")");
+
+                    oetText.getEditText().getOTools().addToolItem(new OPictureTool(oetText.getEditText(), this));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

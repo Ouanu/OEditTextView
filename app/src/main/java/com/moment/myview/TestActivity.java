@@ -1,6 +1,7 @@
 package com.moment.myview;
 
 import android.graphics.Bitmap;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -37,9 +38,12 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
             //存储完成后需要清除相关的进程
             saveImgOut.flush();
             saveImgOut.close();
-            etText.setText(Uri.fromFile(saveFile).toString());
+            etText.getText().insert(0, "![Image](" + Uri.fromFile(saveFile) + " \"Image\")");
+//            etText.setText(Uri.fromFile(saveFile).toString());
+//            etText.getText().setSpan(new ImageSpan(this, MediaStore.Images.Media.getBitmap(this.getContentResolver(), Uri.fromFile(saveFile))), 0, etText.getText().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            Log.d("+++++++++++++", "setMySpan: " + Uri.fromFile(saveFile));
             Log.d("Save Bitmap", "The picture is save to your phone!");
-//            etText.setMySpan(Uri.fromFile(saveFile), this);
+            etText.setMySpan(Uri.fromFile(saveFile), this);
         } catch (IOException ex) {
             ex.printStackTrace();
         }

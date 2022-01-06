@@ -24,12 +24,12 @@ public class OPictureTool extends OToolItem {
 
     private static final String REGEX = "!\\[[^]]*]\\((?<filename>.*?)(?=[\")])(?<optionalpart>\".*\")?\\)";
     private Bitmap image;
-    private ContentResolver resolver;
+    private Context context;
 
 
-    public OPictureTool(OEditText oetText, ContentResolver resolver) {
+    public OPictureTool(OEditText oetText, Context context) {
         super(oetText);
-        this.resolver = resolver;
+        this.context = context;
     }
 
     @Override
@@ -42,10 +42,8 @@ public class OPictureTool extends OToolItem {
         Pattern p = Pattern.compile(REGEX);
         Matcher matcher = p.matcher(Objects.requireNonNull(getOetText().getText())); // 获取 matcher 对象
         while (matcher.find()) {
-//            Log.d("PIC", "setStyle: " + matcher.group(1));
             try {
-                image = MediaStore.Images.Media.getBitmap(getOetText().getContext().getContentResolver(), Uri.parse(matcher.group(1)));
-//                image = BitmapFactory.decodeFile(matcher.group(1));
+                image = MediaStore.Images.Media.getBitmap(context.getContentResolver(), Uri.parse(matcher.group(1)));
                 int width = image.getWidth();
                 int height = image.getHeight();
                 // 计算缩放比例.
@@ -56,7 +54,7 @@ public class OPictureTool extends OToolItem {
                 // 得到新的图片.
                 Bitmap newBitmap = Bitmap.createBitmap(image, 0, 0, width, height, matrix, true);
                 getOetText().getText().setSpan(
-                        new ImageSpan(getOetText().getContext(), newBitmap), matcher.start(), matcher.end(),
+                        new ImageSpan(context, newBitmap), matcher.start(), matcher.end(),
                         Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             } catch (IOException e) {
                 e.printStackTrace();
