@@ -60,7 +60,12 @@ public class MarkDownActivity extends AppCompatActivity implements View.OnClickL
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }
-                    oetText.getEditText().getText().insert(startSelect, "![Image](" + Uri.fromFile(saveFile) + "\"Image\")");
+                    if (startSelect == -1) {
+                        oetText.getEditText().getText().insert(oetText.getEditText().getText().length(), "\n![Image](" + Uri.fromFile(saveFile) + "\"Image\")\n");
+                    } else {
+                        oetText.getEditText().getText().insert(startSelect, "\n![Image](" + Uri.fromFile(saveFile) + "\"Image\")\n");
+                    }
+
 
                     oetText.getEditText().getOTools().addToolItem(new OPictureTool(oetText.getEditText(), this));
                 } catch (IOException e) {
@@ -118,7 +123,7 @@ public class MarkDownActivity extends AppCompatActivity implements View.OnClickL
                 oetText.getEditText().setSelection(oetText.getEditText().getSelectionStart() - 2);
                 break;
             case R.id.add_title:
-                Objects.requireNonNull(oetText.getEditText().getText()).append("\n# ");
+                Objects.requireNonNull(oetText.getEditText().getText()).insert(oetText.getEditText().getSelectionStart(), "\n#");
                 oetText.getEditText().setSelection(oetText.getEditText().getSelectionStart());
                 break;
             case R.id.italic:

@@ -58,9 +58,9 @@ public class OEditText extends androidx.appcompat.widget.AppCompatEditText {
         /*
         if you wanna use the default, you can uncomment these two lines
          */
-        oTools.autoTool();
+//        oTools.autoTool();
         this.addTextChangedListener(textWatcher);
-        this.setOnTouchListener(setTouchEvent);
+//        this.setOnTouchListener(setTouchEvent);
     }
 
 
@@ -72,34 +72,34 @@ public class OEditText extends androidx.appcompat.widget.AppCompatEditText {
      * i suggest you can set a button and control it when you wanna edit
      */
 
-    OnTouchListener setTouchEvent = new OnTouchListener() {
-        @SuppressLint("ClickableViewAccessibility")
-        @Override
-        public boolean onTouch(View v, MotionEvent event) {
-            if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                startY = event.getY(); // Get the position y when you click it at the first time
-                startTime = System.currentTimeMillis();
-            } else if (event.getAction() == MotionEvent.ACTION_UP) {
-                long time = System.currentTimeMillis() - startTime;
-                float endY = event.getY();    // get the end position y when you hand up your finger
-                if ((endY - startY > 50.0f || startY - endY > 50.0f)) {
-                    v.setFocusable(false);   // lose the focus
-                    v.setFocusableInTouchMode(false);
-                    im.hideSoftInputFromWindow(v.getApplicationWindowToken(), 0);
-                    for (OToolItem oToolItem : oTools.getToolList()) {
-                        oToolItem.applyOMDTool();
-                    }
-
-                } else if ((endY - startY < 50.0f || startY - endY < 50.0f) && time < 500){
-                    v.setFocusable(true);    // focus back
-                    v.setFocusableInTouchMode(true);
-                    im.showSoftInput(v, 0);
-                    setOetText();
-                }
-            }
-            return false;
-        }
-    };
+//    OnTouchListener setTouchEvent = new OnTouchListener() {
+//        @SuppressLint("ClickableViewAccessibility")
+//        @Override
+//        public boolean onTouch(View v, MotionEvent event) {
+//            if (event.getAction() == MotionEvent.ACTION_DOWN) {
+//                startY = event.getY(); // Get the position y when you click it at the first time
+//                startTime = System.currentTimeMillis();
+//            } else if (event.getAction() == MotionEvent.ACTION_UP) {
+//                long time = System.currentTimeMillis() - startTime;
+//                float endY = event.getY();    // get the end position y when you hand up your finger
+//                if ((endY - startY > 50.0f || startY - endY > 50.0f)) {
+//                    v.setFocusable(false);   // lose the focus
+//                    v.setFocusableInTouchMode(false);
+//                    im.hideSoftInputFromWindow(v.getApplicationWindowToken(), 0);
+//                    for (OToolItem oToolItem : oTools.getToolList()) {
+//                        oToolItem.applyOMDTool();
+//                    }
+//
+//                } else if ((endY - startY < 50.0f || startY - endY < 50.0f) && time < 500){
+//                    v.setFocusable(true);    // focus back
+//                    v.setFocusableInTouchMode(true);
+//                    im.showSoftInput(v, 0);
+//                    setOetText();
+//                }
+//            }
+//            return false;
+//        }
+//    };
 
     TextWatcher textWatcher = new TextWatcher() {
         @Override
